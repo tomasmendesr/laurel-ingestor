@@ -1,0 +1,58 @@
+### Variables
+@baseUrl = http://localhost:3000
+# Opcional: correlación cliente ↔ logs; si no lo mandás, el servidor genera un UUID.
+@requestId = aaaaaaaa-bbbb-4ccc-bbbb-aaaaaaaaaaaa
+# Obligatorio en /activities (ver INGEST_API_KEY en .env si querés validar valor).
+@apiKey = dev-local-key
+
+### 0. Health (liveness / readiness simple)
+GET {{baseUrl}}/health
+x-request-id: {{requestId}}
+
+### 1. Ingesta por lotes (batch)
+POST {{baseUrl}}/activities
+Content-Type: application/json
+x-api-key: {{apiKey}}
+x-request-id: {{requestId}}
+
+{
+  "activities": [
+    {
+      "activityId": "550e8400-e29b-41d4-a716-446655440000",
+      "userId": "tmr",
+      "task": "Aprender NestJS",
+      "duration": 3600,
+      "startTime": "2026-05-10T10:00:00Z"
+    },
+    {
+      "activityId": "6ba7b810-9dad-11d1-80b4-00c04fd430c8",
+      "userId": "tmr",
+      "task": "Revisar facturación",
+      "duration": 1200,
+      "startTime": "2026-05-10T11:00:00Z"
+    }
+  ]
+}
+
+### 2. GET todas (ver lo persistido)
+GET {{baseUrl}}/activities
+x-api-key: {{apiKey}}
+x-request-id: {{requestId}}
+
+### 3. Idempotencia: reenviar el mismo batch (skippedDuplicateIds)
+POST {{baseUrl}}/activities
+Content-Type: application/json
+x-api-key: {{apiKey}}
+x-request-id: {{requestId}}
+
+{
+  "activities": [
+    {
+      "activityId": "550e8400-e29b-41d4-a716-446655440000",
+      "userId": "tmr",
+      "task": "Aprender NestJS",
+      "duration": 3600,
+      "startTime": "2026-05-10T10:00:00Z"
+    }
+  ]
+}
