@@ -8,11 +8,11 @@ import { LoggingInterceptor } from './common/interceptors/logging.interceptor';
 export function configureApp(app: INestApplication): void {
   app.useGlobalPipes(
     new ValidationPipe({
-      whitelist: true,
-      forbidNonWhitelisted: true,
-      transform: true,
+      whitelist: true, // elimina las propiedades que no están en el DTO
+      forbidNonWhitelisted: true, // lanza un error si se envían propiedades que no están en el DTO
+      transform: true, // transforma los datos a los tipos del DTO
     }),
   );
-  app.useGlobalInterceptors(new LoggingInterceptor());
-  app.useGlobalFilters(new AllExceptionsFilter());
+  app.useGlobalInterceptors(new LoggingInterceptor()); // intercepta las peticiones y respuestas
+  app.useGlobalFilters(new AllExceptionsFilter()); // intercepta los errores y lanza una respuesta estandarizada
 }
