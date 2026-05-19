@@ -30,6 +30,9 @@ coverage/
 .settings/
 *.sublime-workspace
 
+# Local History (editor extensions)
+.history/
+
 # IDE - VSCode
 .vscode/*
 !.vscode/settings.json

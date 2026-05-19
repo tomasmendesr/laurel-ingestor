@@ -2,6 +2,9 @@
   "name": "laurel-ingestor",
   "private": true,
   "description": "Monorepo: ingest API (NestJS) + web client",
+  "devDependencies": {
+    "typescript": "~6.0.2"
+  },
   "scripts": {
     "dev:api": "npm run start:dev --prefix api",
     "build:api": "npm run build --prefix api",

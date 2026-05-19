@@ -20,7 +20,7 @@ export function ActivityTable({ rows }: Props) {
         <p className="text-xs text-zinc-500">{rows.length} fila(s)</p>
       </div>
       <div className="overflow-x-auto">
-        <table className="w-full min-w-[640px] text-left text-sm text-zinc-200">
+        <table className="w-full text-left boarder-collapse"> {/* min-w-[640px] text-sm text-zinc-200">*/}
           <thead>
             <tr className="border-b border-zinc-700/60 bg-zinc-950/50 text-xs uppercase tracking-wide text-zinc-500">
               <th className="px-4 py-2 font-medium">activityId</th>
